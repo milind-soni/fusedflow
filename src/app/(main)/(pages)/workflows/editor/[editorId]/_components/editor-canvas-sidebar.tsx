@@ -4,11 +4,14 @@ import { useNodeConnections } from '@/providers/connections-provider'
 import { useEditor } from '@/providers/editor-provider'
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
+import { CONNECTIONS, EditorCanvasDefaultCardTypes } from '@/lib/constant'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { onDragStart } from '@/lib/editor-utils'
 import EditorCanvasIconHelper from './editor-canvas-card-icon-helper'
+import { Accordion } from '@radix-ui/react-accordion'
+import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import RenderConnectionAccordion from './render-connection-accordion'
 
 type Props = {
     nodes:EditorNodeType[]
@@ -53,6 +56,29 @@ const EditorCanvasSidebar = ({nodes}: Props) => {
                 </CardHeader>
               </Card>
             ))}
+        </TabsContent>
+        <TabsContent
+        value='settings'
+        className='-mt-6'
+        >
+            <div className='px-2 py-4 text-center text-xl font-bold'>
+                {state.editor.selectedNode.data.title}
+            </div>
+            <Accordion type="multiple">
+  <AccordionItem value="item-1">
+    <AccordionTrigger className='!no-underline'>
+        Account</AccordionTrigger>
+    <AccordionContent>
+    {CONNECTIONS.map((connection) => (
+                  <RenderConnectionAccordion
+                    key={connection.title}
+                    state={state}
+                    connection={connection}
+                  />
+                ))}    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
         </TabsContent>
         </Tabs>
         </aside>
