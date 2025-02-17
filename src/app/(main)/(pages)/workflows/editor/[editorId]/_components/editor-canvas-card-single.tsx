@@ -8,8 +8,6 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Badge } from '@/components/ui/badge'
 import clsx from 'clsx'
 
-type Props = {}
-
 const EditorCanvasCardSingle = ({ data }: { data: EditorCanvasCardType }) => {
     const {dispatch, state} = useEditor()
     const nodeId = useNodeId()

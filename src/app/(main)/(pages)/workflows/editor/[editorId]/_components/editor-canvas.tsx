@@ -26,10 +26,6 @@ import { toast } from 'sonner'
 import { usePathname } from 'next/navigation'
 import { v4 } from 'uuid'
 import { EditorCanvasDefaultCardTypes } from '@/lib/constant'
-// import FlowInstance from './flow-instance'
-// import EditorCanvasSidebar from './editor-canvas-sidebar'
-// import { onGetNodesEdges } from '../../../_actions/workflow-connections'
-import { Toaster } from "@/components/ui/sonner"
 import FlowInstance from './flow-instance'
 import EditorCanvasSidebar from './editor-canvas-sidebar'
 
@@ -95,9 +91,6 @@ const EditorCanvas = (props: Props) => {
         return
       }
 
-      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
-      // and you don't need to subtract the reactFlowBounds.left/top anymore
-      // details: https://reactflow.dev/whats-new/2023-11-10
       if (!reactFlowInstance) return
       const position = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
@@ -162,24 +155,34 @@ const EditorCanvas = (props: Props) => {
       'Custom Webhook': EditorCanvasCardSingle,
       'Google Calendar': EditorCanvasCardSingle,
       Wait: EditorCanvasCardSingle,
+      'Aggregated_Traffic_Incidents_by_Accident_Severity__H3': EditorCanvasCardSingle,
+      'AirBnb_Listings': EditorCanvasCardSingle,
+      'Airplane_Detection_AOI': EditorCanvasCardSingle,
+      'Arcgis_Rgb': EditorCanvasCardSingle,
+      'Arraylake_Example': EditorCanvasCardSingle,
+      'Blank_Basemap': EditorCanvasCardSingle,
+      'Boston_Bikes_Example': EditorCanvasCardSingle,
+      'Building_Tile_Example': EditorCanvasCardSingle,
+      'CDLs_Tile_Example': EditorCanvasCardSingle,
+      'Census_ACS_5yr': EditorCanvasCardSingle,
+      'Compute_TWI': EditorCanvasCardSingle,
+      'Coverage_Model_ibis': EditorCanvasCardSingle,
+      'Crop_Mask_Zonal_Statistics': EditorCanvasCardSingle,
+      'DC_AOI_Example': EditorCanvasCardSingle,
+      'DC_AOI_Tile': EditorCanvasCardSingle,
+      'DC_AOI_Tile_Hex': EditorCanvasCardSingle,
+      'DC_File_Example': EditorCanvasCardSingle,
+      'DEM_10m_Tile_Example': EditorCanvasCardSingle,
+      'DEM_Raster_to_Vector_Example': EditorCanvasCardSingle,
+      'DEM_Tile_Example': EditorCanvasCardSingle,
+      'SJoin': EditorCanvasCardSingle,
+      'Buffer': EditorCanvasCardSingle,
+      'Intersect': EditorCanvasCardSingle,
+      'Union': EditorCanvasCardSingle,
+      'Difference': EditorCanvasCardSingle,
     }),
     []
   )
-
-//   const onGetWorkFlow = async () => {
-//     setIsWorkFlowLoading(true)
-//     const response = await onGetNodesEdges(pathname.split('/').pop()!)
-//     if (response) {
-//       setEdges(JSON.parse(response.edges!))
-//       setNodes(JSON.parse(response.nodes!))
-//       setIsWorkFlowLoading(false)
-//     }
-//     setIsWorkFlowLoading(false)
-//   }
-
-//   useEffect(() => {
-//     onGetWorkFlow()
-//   }, [])
 
   return (
     <ResizablePanelGroup direction="horizontal">
@@ -265,16 +268,16 @@ const EditorCanvas = (props: Props) => {
               />
             </svg>
           </div>
-        ):(
-            <FlowInstance
-              edges={edges}
-              nodes={nodes}
-            >
-              <EditorCanvasSidebar nodes={nodes} />
-            </FlowInstance>
-          )}
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    )
-  }
+        ) : (
+          <FlowInstance
+            edges={edges}
+            nodes={nodes}
+          >
+            <EditorCanvasSidebar nodes={nodes} />
+          </FlowInstance>
+        )}
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
 export default EditorCanvas
